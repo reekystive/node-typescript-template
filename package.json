@@ -8,6 +8,9 @@
     "build": "tsc"
   },
   "devDependencies": {
+    "@eslint/js": "^8.51.0",
+    "@types/eslint-config-prettier": "^6.11.1",
+    "@types/eslint__js": "^8.42.1",
     "@types/node": "^20.8.5",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
@@ -15,6 +18,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-define-config": "^1.24.1",
     "eslint-plugin-prettier": "^5.0.1",
+    "globals": "^13.23.0",
     "prettier": "^3.0.3",
     "prettier-plugin-organize-imports": "^3.2.3",
     "ts-node": "^10.9.1",

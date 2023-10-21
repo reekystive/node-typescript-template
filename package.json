@@ -8,10 +8,13 @@
     "start": "node dist/index.js",
     "build": "tsc"
   },
-  "devDependencies": {
-    "@eslint/js": "^8.51.0",
+  "dependencies": {
     "@koa/cors": "^4.0.0",
     "@koa/router": "^11.0.2",
+    "koa": "^2.14.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^8.51.0",
     "@types/eslint-config-prettier": "^6.11.1",
     "@types/eslint__js": "^8.42.1",
     "@types/koa": "^2.13.10",
@@ -25,7 +28,6 @@
     "eslint-define-config": "^1.24.1",
     "eslint-plugin-prettier": "^5.0.1",
     "globals": "^13.23.0",
-    "koa": "^2.14.2",
     "prettier": "^3.0.3",
     "prettier-plugin-organize-imports": "^3.2.3",
     "ts-node": "^10.9.1",

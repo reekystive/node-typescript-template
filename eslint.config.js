@@ -18,13 +18,18 @@ export default defineFlatConfig([
     },
     languageOptions: {
       parser: tsParser,
+      parserOptions: {
+        project: ['./tsconfig.json', './tsconfig.node.json'],
+      },
       globals: { ...globals.node },
     },
     rules: {
       ...eslintJs.configs.recommended.rules,
-      ...tsPlugin.configs.recommended.rules,
+      ...tsPlugin.configs['strict-type-checked'].rules,
+      ...tsPlugin.configs['stylistic-type-checked'].rules,
       ...prettierConfigs.rules,
       ...prettierPluginRecommendedConfig.rules,
+      '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {

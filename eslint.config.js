@@ -30,6 +30,7 @@ export default defineFlatConfig([
       ...prettierConfigs.rules,
       ...prettierPluginRecommendedConfig.rules,
       '@typescript-eslint/require-await': 'off',
+      '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
       '@typescript-eslint/no-unused-vars': [
         'error',
         {

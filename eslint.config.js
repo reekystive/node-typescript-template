@@ -29,7 +29,7 @@ export default defineFlatConfig([
       ...tsPlugin.configs['stylistic-type-checked'].rules,
       ...prettierConfigs.rules,
       ...prettierPluginRecommendedConfig.rules,
-      '@typescript-eslint/consistent-type-imports': 'error',
+      '@typescript-eslint/require-await': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {

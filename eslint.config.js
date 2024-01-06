@@ -10,6 +10,7 @@ import globals from 'globals';
 const prettierPluginRecommendedConfig = /** @type {any} */ (prettierPlugin.configs).recommended;
 
 export default defineFlatConfig([
+  { ignores: ['**/node_modules/**', '**/dist/**'] },
   {
     files: ['src/**/*.ts'],
     plugins: {

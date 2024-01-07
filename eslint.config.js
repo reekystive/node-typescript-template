@@ -10,6 +10,7 @@ import globals from 'globals';
 const prettierPluginRecommendedConfig = /** @type {any} */ (prettierPlugin.configs).recommended;
 
 export default defineFlatConfig([
+  { ignores: ['**/node_modules/**', '**/dist/**'] },
   {
     files: ['src/**/*.ts'],
     plugins: {
@@ -31,12 +32,8 @@ export default defineFlatConfig([
       ...prettierPluginRecommendedConfig.rules,
       '@typescript-eslint/require-await': 'off',
       '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        {
-          argsIgnorePattern: '^_',
-        },
-      ],
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-confusing-void-expression': ['error', { ignoreArrowShorthand: true }],
     },
   },
 ]);

@@ -26,8 +26,8 @@ export default defineFlatConfig([
     },
     rules: {
       ...eslintJs.configs.recommended.rules,
-      ...tsPlugin.configs['strict-type-checked'].rules,
-      ...tsPlugin.configs['stylistic-type-checked'].rules,
+      ...tsPlugin.configs['strict-type-checked']?.rules,
+      ...tsPlugin.configs['stylistic-type-checked']?.rules,
       ...prettierConfigs.rules,
       ...prettierPluginRecommendedConfig.rules,
       '@typescript-eslint/require-await': 'off',

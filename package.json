@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/index.ts",
     "start": "node dist/index.js",
-    "build": "tsc"
+    "build": "tsc --project tsconfig.json"
   },
   "devDependencies": {
     "@cspell/eslint-plugin": "^8.3.2",

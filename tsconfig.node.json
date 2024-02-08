@@ -15,5 +15,5 @@
     "checkJs": true,
     "outDir": "dist"
   },
-  "include": ["eslint.config.js", ".prettierrc.mjs"]
+  "include": ["eslint.config.js", ".prettierrc.mjs", "types"]
 }

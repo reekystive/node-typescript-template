@@ -1,3 +1,5 @@
+/// <reference types="./types/eslint.config.d.ts" />
+
 import eslintJs from '@eslint/js';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
@@ -6,15 +8,12 @@ import { defineFlatConfig } from 'eslint-define-config';
 import prettierPlugin from 'eslint-plugin-prettier';
 import globals from 'globals';
 
-/** @type {import('eslint').ESLint.ConfigData} */
-const prettierPluginRecommendedConfig = /** @type {any} */ (prettierPlugin.configs).recommended;
-
 export default defineFlatConfig([
   { ignores: ['**/node_modules/**', '**/dist/**'] },
   {
-    files: ['src/**/*.ts'],
+    files: ['**/*.{,c,m}js', '**/*.{,c,m}ts'],
     plugins: {
-      '@typescript-eslint': /** @type {any} */ (tsPlugin),
+      '@typescript-eslint': tsPlugin,
       prettier: prettierPlugin,
     },
     languageOptions: {
@@ -26,10 +25,10 @@ export default defineFlatConfig([
     },
     rules: {
       ...eslintJs.configs.recommended.rules,
-      ...tsPlugin.configs['strict-type-checked']?.rules,
-      ...tsPlugin.configs['stylistic-type-checked']?.rules,
+      ...tsPlugin.configs['strict-type-checked'].rules,
+      ...tsPlugin.configs['stylistic-type-checked'].rules,
       ...prettierConfigs.rules,
-      ...prettierPluginRecommendedConfig.rules,
+      ...prettierPlugin.configs.recommended.rules,
       '@typescript-eslint/require-await': 'off',
       '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],

@@ -6,4 +6,5 @@ export default {
   singleQuote: true,
   tabWidth: 2,
   plugins: ['prettier-plugin-organize-imports'],
+  organizeImportsSkipDestructiveCodeActions: true,
 };

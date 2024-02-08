@@ -13,7 +13,7 @@
     "types": ["node"],
     "allowJs": true,
     "checkJs": true,
-    "outDir": "dist"
+    "outDir": "dist",
   },
-  "include": ["eslint.config.js", ".prettierrc.mjs", "types"]
+  "include": ["eslint.config.js", ".prettierrc.mjs", "types"],
 }

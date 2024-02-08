@@ -9,8 +9,8 @@
     "outDir": "dist",
     "skipLibCheck": true,
     "noUncheckedIndexedAccess": true,
-    "useUnknownInCatchVariables": true
+    "useUnknownInCatchVariables": true,
   },
   "include": ["src"],
-  "references": [{ "path": "tsconfig.node.json" }]
+  "references": [{ "path": "tsconfig.node.json" }],
 }

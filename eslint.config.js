@@ -1,14 +1,14 @@
 /// <reference types="./types/eslint.config.d.ts" />
 
 import cSpellPlugin from '@cspell/eslint-plugin';
+import { fixupPluginRules } from '@eslint/compat';
 import eslintJs from '@eslint/js';
-import tsPlugin from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
 import prettierConfigs from 'eslint-config-prettier';
 import { defineFlatConfig } from 'eslint-define-config';
 import prettierPlugin from 'eslint-plugin-prettier';
 import globals from 'globals';
 import { dirname, resolve } from 'path';
+import tsEslint from 'typescript-eslint';
 import { fileURLToPath } from 'url';
 
 export default defineFlatConfig([
@@ -16,12 +16,12 @@ export default defineFlatConfig([
   {
     files: ['**/*.{,c,m}js', '**/*.{,c,m}ts'],
     plugins: {
-      '@typescript-eslint': tsPlugin,
-      prettier: prettierPlugin,
-      '@cspell': cSpellPlugin,
+      prettier: fixupPluginRules(prettierPlugin),
+      '@cspell': fixupPluginRules(cSpellPlugin),
+      '@typescript-eslint': tsEslint.plugin,
     },
     languageOptions: {
-      parser: tsParser,
+      parser: tsEslint.parser,
       parserOptions: {
         project: ['./tsconfig.json', './tsconfig.node.json'],
       },
@@ -29,8 +29,14 @@ export default defineFlatConfig([
     },
     rules: {
       ...eslintJs.configs.recommended.rules,
-      ...tsPlugin.configs['strict-type-checked'].rules,
-      ...tsPlugin.configs['stylistic-type-checked'].rules,
+      ...tsEslint.configs.strictTypeChecked.reduce(
+        (rules, config) => ({ ...rules, ...config.rules }),
+        /** @type {import('eslint').Linter.RulesRecord} */ ({})
+      ),
+      ...tsEslint.configs.stylisticTypeChecked.reduce(
+        (rules, config) => ({ ...rules, ...config.rules }),
+        /** @type {import('eslint').Linter.RulesRecord} */ ({})
+      ),
       ...prettierConfigs.rules,
       ...prettierPlugin.configs.recommended.rules,
       ...cSpellPlugin.configs.recommended.rules,

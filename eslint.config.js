@@ -14,7 +14,7 @@ import { fileURLToPath } from 'url';
 export default defineFlatConfig([
   { ignores: ['**/node_modules/**', '**/dist/**'] },
   {
-    files: ['**/*.{,c,m}js', '**/*.{,c,m}ts'],
+    files: ['**/*.{,c,m}{j,t}s{,x}'],
     plugins: {
       prettier: fixupPluginRules(prettierPlugin),
       '@cspell': fixupPluginRules(cSpellPlugin),

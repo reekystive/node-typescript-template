@@ -1,5 +1,3 @@
-/// <reference types="./types/eslint.config.d.ts" />
-
 import cSpellPlugin from '@cspell/eslint-plugin';
 import { fixupPluginRules } from '@eslint/compat';
 import eslintJs from '@eslint/js';
@@ -12,13 +10,16 @@ import tsEslint from 'typescript-eslint';
 import { fileURLToPath } from 'url';
 
 export default defineFlatConfig([
-  { ignores: ['**/node_modules/**', '**/dist/**'] },
+  {
+    ignores: ['**/node_modules/**', '**/dist/**'],
+  },
   {
     files: ['**/*.{,c,m}{j,t}s{,x}'],
     plugins: {
       prettier: fixupPluginRules(prettierPlugin),
       '@cspell': fixupPluginRules(cSpellPlugin),
-      '@typescript-eslint': tsEslint.plugin,
+      // @ts-expect-error type is not correct for typescript-eslint
+      '@typescript-eslint': fixupPluginRules(tsEslint.plugin),
     },
     languageOptions: {
       parser: tsEslint.parser,
@@ -31,14 +32,13 @@ export default defineFlatConfig([
       ...eslintJs.configs.recommended.rules,
       ...tsEslint.configs.strictTypeChecked.reduce(
         (rules, config) => ({ ...rules, ...config.rules }),
-        /** @type {import('eslint').Linter.RulesRecord} */ ({})
+        /** @type {Record<string, any>} */ ({})
       ),
       ...tsEslint.configs.stylisticTypeChecked.reduce(
         (rules, config) => ({ ...rules, ...config.rules }),
-        /** @type {import('eslint').Linter.RulesRecord} */ ({})
+        /** @type {Record<string, any>} */ ({})
       ),
-      ...prettierConfigs.rules,
-      ...prettierPlugin.configs.recommended.rules,
+      // @ts-expect-error no types for cspell plugin
       ...cSpellPlugin.configs.recommended.rules,
       quotes: ['error', 'single', { avoidEscape: true }],
       '@typescript-eslint/require-await': 'off',
@@ -54,6 +54,9 @@ export default defineFlatConfig([
           customWordListFile: resolve(dirname(fileURLToPath(import.meta.url)), 'cspell.config.yaml'),
         },
       ],
+      ...prettierConfigs.rules,
+      // @ts-expect-error no types for prettier plugin
+      ...prettierPlugin.configs.recommended.rules,
     },
   },
 ]);

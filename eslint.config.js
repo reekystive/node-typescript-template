@@ -1,62 +1,60 @@
-import cSpellPlugin from '@cspell/eslint-plugin';
-import { fixupPluginRules } from '@eslint/compat';
-import eslintJs from '@eslint/js';
-import prettierConfigs from 'eslint-config-prettier';
-import { defineFlatConfig } from 'eslint-define-config';
+import cspellPlugin from '@cspell/eslint-plugin';
+import eslintJsPlugin from '@eslint/js';
+import eslintConfigPrettier from 'eslint-config-prettier';
 import prettierPlugin from 'eslint-plugin-prettier';
 import globals from 'globals';
-import { dirname, resolve } from 'path';
 import tsEslint from 'typescript-eslint';
-import { fileURLToPath } from 'url';
 
-export default defineFlatConfig([
-  {
-    ignores: ['**/node_modules/**', '**/dist/**'],
-  },
-  {
-    files: ['**/*.{,c,m}{j,t}s{,x}'],
+const typescriptConfigs = /** @type {import('eslint').Linter.Config[]} */ (
+  tsEslint.config({
     plugins: {
-      prettier: fixupPluginRules(prettierPlugin),
-      '@cspell': fixupPluginRules(cSpellPlugin),
-      // @ts-expect-error type is not correct for typescript-eslint
-      '@typescript-eslint': fixupPluginRules(tsEslint.plugin),
+      '@typescript-eslint': tsEslint.plugin,
     },
     languageOptions: {
       parser: tsEslint.parser,
       parserOptions: {
-        project: ['./tsconfig.json', './tsconfig.node.json'],
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
       },
-      globals: { ...globals.node },
+      globals: { ...globals.browser, ...globals.es2020 },
     },
+    extends: [tsEslint.configs.strictTypeChecked, tsEslint.configs.stylisticTypeChecked],
+  })
+);
+
+/**
+ * @type {import('eslint').Linter.Config[]}
+ */
+const eslintConfig = [
+  { ignores: ['node_modules', 'dist'] },
+  { linterOptions: { reportUnusedDisableDirectives: true } },
+  eslintJsPlugin.configs.recommended,
+  ...typescriptConfigs,
+  {
+    plugins: { '@cspell': cspellPlugin },
     rules: {
-      ...eslintJs.configs.recommended.rules,
-      ...tsEslint.configs.strictTypeChecked.reduce(
-        (rules, config) => ({ ...rules, ...config.rules }),
-        /** @type {Record<string, any>} */ ({})
-      ),
-      ...tsEslint.configs.stylisticTypeChecked.reduce(
-        (rules, config) => ({ ...rules, ...config.rules }),
-        /** @type {Record<string, any>} */ ({})
-      ),
-      // @ts-expect-error no types for cspell plugin
-      ...cSpellPlugin.configs.recommended.rules,
-      quotes: ['error', 'single', { avoidEscape: true }],
-      '@typescript-eslint/require-await': 'off',
-      '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-      '@typescript-eslint/no-confusing-void-expression': ['error', { ignoreArrowShorthand: true }],
-      '@typescript-eslint/restrict-template-expressions': ['error', { allowNumber: true, allowBoolean: true }],
       '@cspell/spellchecker': [
         'warn',
-        {
-          checkComments: true,
+        /** @type {import('@cspell/eslint-plugin').Options} */ ({
+          autoFix: true,
+          generateSuggestions: true,
           numSuggestions: 3,
-          customWordListFile: resolve(dirname(fileURLToPath(import.meta.url)), 'cspell.config.yaml'),
-        },
+          configFile: new URL('./cspell.config.yaml', import.meta.url).toString(),
+        }),
       ],
-      ...prettierConfigs.rules,
-      // @ts-expect-error no types for prettier plugin
-      ...prettierPlugin.configs.recommended.rules,
     },
   },
-]);
+  eslintConfigPrettier,
+  {
+    plugins: { prettier: prettierPlugin },
+    rules: { 'prettier/prettier': 'error' },
+  },
+  {
+    rules: {
+      '@typescript-eslint/restrict-template-expressions': ['error', { allowNumber: true }],
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    },
+  },
+];
+
+export default eslintConfig;

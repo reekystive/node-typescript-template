@@ -1,16 +1,4 @@
 {
-  "compilerOptions": {
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "strict": true,
-    "lib": ["ES2022"],
-    "types": ["node"],
-    "outDir": "dist",
-    "skipLibCheck": true,
-    "noUncheckedIndexedAccess": true,
-    "useUnknownInCatchVariables": true,
-  },
-  "include": ["src"],
-  "references": [{ "path": "tsconfig.node.json" }],
+  "files": [],
+  "references": [{ "path": "tsconfig.app.json" }, { "path": "tsconfig.node.json" }],
 }

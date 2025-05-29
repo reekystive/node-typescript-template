@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import tsEslint from 'typescript-eslint';
 
 /** @type {string[]} */
-const TS_FILES = ['**/*.{,c,m}{j,t}s{,x}'];
+const TS_FILES = ['**/{,.}*.{,c,m}{j,t}s'];
 
 const typescriptConfigs = /** @type {import('eslint').Linter.Config[]} */ (
   tsEslint.config({

@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "allowJs": true,
     "checkJs": true,
+    "rootDir": ".",
     "outDir": "./node_modules/.cache/tsc-node",
   },
   "include": ["./*.ts", "./.*.ts", "./*.js", "./.*.js", "./*.mjs", "./.*.mjs"],
+  "exclude": [],
 }

@@ -1,6 +1,7 @@
 words:
-  - reekystive
   - compat
+  - reekystive
+  - Vitest
 flagWords:
   - blacklist -> blocklist
   - whitelist -> allowlist

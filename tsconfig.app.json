@@ -12,6 +12,7 @@
     "types": ["node"],
     "skipLibCheck": true,
     "sourceMap": true,
+    "inlineSources": true,
     "declaration": true,
     "declarationMap": true,
     "outDir": "./dist",

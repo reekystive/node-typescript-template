@@ -20,8 +20,8 @@
     // tsBuildInfoFile is generated at outDir/relativePathOfConfigFromRootDir/tsconfigName.tsbuildinfo by default,
     // which is ./src/.. -> project root. explicitly set it to ./dist/tsconfig.app.tsbuildinfo here.
     // https://github.com/microsoft/TypeScript/issues/30925#issuecomment-483371766
-    "tsBuildInfoFile": "./dist/tsconfig.app.tsbuildinfo",
+    "tsBuildInfoFile": "./dist/tsconfig.app.tsbuildinfo"
   },
   "include": ["src"],
-  "exclude": ["**/node_modules/", "**/__tests__/"],
+  "exclude": ["**/node_modules/", "**/__tests__/"]
 }

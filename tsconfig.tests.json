@@ -4,8 +4,8 @@
   "compilerOptions": {
     "types": ["node", "vitest/globals"],
     "rootDir": ".",
-    "outDir": "./node_modules/.cache/tsc-tests",
+    "outDir": "./node_modules/.cache/tsc-tests"
   },
   "include": ["**/__tests__/"],
-  "exclude": ["**/node_modules/"],
+  "exclude": ["**/node_modules/"]
 }

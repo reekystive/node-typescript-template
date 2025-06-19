@@ -1,10 +1,13 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "./tsconfig.app.json",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "types": ["node", "vitest/globals"],
+    "types": ["node"],
     "rootDir": ".",
-    "outDir": "./node_modules/.cache/tsc-tests"
+    "outDir": "./node_modules/.cache/tsc-tests",
+    // https://github.com/microsoft/TypeScript/issues/30925#issuecomment-483371766
+    "tsBuildInfoFile": "./node_modules/.cache/tsc-tests/tsconfig.tests.tsbuildinfo",
+    "emitDeclarationOnly": true
   },
   "include": ["**/__tests__/"],
   "exclude": ["**/node_modules/"]

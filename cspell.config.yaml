@@ -1,5 +1,7 @@
 words:
   - compat
+  - esbuild
+  - nodenext
   - reekystive
   - Vitest
 flagWords:
